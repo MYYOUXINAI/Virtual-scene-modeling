@@ -18,6 +18,7 @@ Camera* camera = new Camera();
 Light* light = new Light();
 MeshPainter *painter = new MeshPainter();
 MeshPainter* painter2 = new MeshPainter();
+MeshPainter* sky_painter = new MeshPainter();
 
 //单独存放机器人的各个部分
 MeshPainter* painter_hat = new MeshPainter();
@@ -44,6 +45,9 @@ std::vector<TriMesh *> meshList;
 std::vector<TriMesh*> meshList2;
 //to draw robot
 std::vector<TriMesh*>meshList3;
+
+//to draw skybox
+std::vector<TriMesh*>meshList4;
 
 //用于保存robot的变换矩阵
 class MatrixStack {
@@ -103,7 +107,7 @@ TriMesh* right_lower_leg = new TriMesh();
 float theta[11] = {
 	0.0,//hat
 	0.0,//head
-	3600.0,//body
+	0.0,//body
 	0.0,//left_upper_arm
 	0.0,//right_upper_arm
 	0.0,//left_lower_arm
@@ -183,7 +187,6 @@ void display_right_lower_leg(glm::mat4 modelMatrix)
 {
 	painter_right_lower_leg->drawRobot(light, camera, modelMatrix);
 }
-
 
 
 
@@ -318,7 +321,7 @@ void display_floor()
 	// 设置物体的旋转位移
 	floor->setTranslation(glm::vec3(0, -0.04, -10.0));
 	floor->setRotation(glm::vec3(0, 0, 0));
-	floor->setScale(glm::vec3(40.0, 3.0, 60.0));
+	floor->setScale(glm::vec3(200.0, 3.0, 200.0));
 
 	floor->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 	floor->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -329,6 +332,7 @@ void display_floor()
 	painter2->addMesh(floor, "mesh_a", "./assets/floor.png", vshader, fshader);
 	meshList2.push_back(floor);
 }
+
 
 
 void init()
@@ -346,7 +350,135 @@ void init()
 	light->setAttenuation(1.0, 0.045, 0.0075); // 衰减系数
 
 
+	//to draw skybox
+	if (true)
+	{
 
+		//right
+		TriMesh* sky_right = new TriMesh();
+		sky_right->setNormalize(true);
+		// 创建圆柱体
+		sky_right->generateSquareRight(glm::vec3(0.0, 0.0, 0.0));
+		//exit(-1);
+		// 设置物体的旋转位移
+		sky_right->setTranslation(glm::vec3(0.0, 0.0, 0.0));
+		sky_right->setRotation(glm::vec3(0.0, 0.0, 0.0));
+		sky_right->setScale(glm::vec3(60.0, 60.0, 60.0));
+
+		sky_right->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		sky_right->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		sky_right->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		sky_right->setShininess(1.0); //高光系数
+		// 加到painter中
+		sky_painter->addMesh(sky_right, "mesh_a", "./assets/right.jpg", vshader, fshader); 	// 指定纹理与着色器
+		// 我们创建的这个加入一个容器内，为了程序结束时将这些数据释放
+		meshList4.push_back(sky_right);
+
+
+		//left
+		TriMesh* sky_left = new TriMesh();
+		sky_left->setNormalize(true);
+		// 创建圆柱体
+		sky_left->generateSquareLeft(glm::vec3(0.0, 0.0, 0.0));
+		//exit(-1);
+		// 设置物体的旋转位移
+		sky_left->setTranslation(glm::vec3(0.0, 0.0, 0.0));
+		sky_left->setRotation(glm::vec3(0.0, 0.0, 0.0));
+		sky_left->setScale(glm::vec3(60.0, 60.0, 60.0));
+
+		sky_left->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		sky_left->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		sky_left->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		sky_left->setShininess(1.0); //高光系数
+		// 加到painter中
+		sky_painter->addMesh(sky_left, "mesh_a", "./assets/left.jpg", vshader, fshader); 	// 指定纹理与着色器
+		// 我们创建的这个加入一个容器内，为了程序结束时将这些数据释放
+		meshList4.push_back(sky_left);
+
+
+		//top
+		TriMesh* sky_top = new TriMesh();
+		sky_top->setNormalize(true);
+		// 创建圆柱体
+		sky_top->generateSquareTop(glm::vec3(0.0, 0.0, 0.0));
+		//exit(-1);
+		// 设置物体的旋转位移
+		sky_top->setTranslation(glm::vec3(0.0, 0.0, 0.0));
+		sky_top->setRotation(glm::vec3(0.0, 0.0, 0.0));
+		sky_top->setScale(glm::vec3(60.0, 60.0, 60.0));
+
+		sky_top->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		sky_top->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		sky_top->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		sky_top->setShininess(1.0); //高光系数
+		// 加到painter中
+		sky_painter->addMesh(sky_top, "mesh_a", "./assets/top.jpg", vshader, fshader); 	// 指定纹理与着色器
+		// 我们创建的这个加入一个容器内，为了程序结束时将这些数据释放
+		meshList4.push_back(sky_top);
+
+
+		//buttom
+		TriMesh* sky_buttom = new TriMesh();
+		sky_buttom->setNormalize(true);
+		// 创建圆柱体
+		sky_buttom->generateSquareButtom(glm::vec3(0.0, 0.0, 0.0));
+		//exit(-1);
+		// 设置物体的旋转位移
+		sky_buttom->setTranslation(glm::vec3(0.0, 0.0, 0.0));
+		sky_buttom->setRotation(glm::vec3(0.0, 0.0, 0.0));
+		sky_buttom->setScale(glm::vec3(60.0, 60.0, 60.0));
+
+		sky_buttom->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		sky_buttom->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		sky_buttom->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		sky_buttom->setShininess(1.0); //高光系数
+		// 加到painter中
+		sky_painter->addMesh(sky_buttom, "mesh_a", "./assets/Buttom.jpg", vshader, fshader); 	// 指定纹理与着色器
+		// 我们创建的这个加入一个容器内，为了程序结束时将这些数据释放
+		meshList4.push_back(sky_buttom);
+
+
+		//back
+		TriMesh* sky_back = new TriMesh();
+		sky_back->setNormalize(true);
+		// 创建圆柱体
+		sky_back->generateSquareBack(glm::vec3(0.0, 0.0, 0.0));
+		//exit(-1);
+		// 设置物体的旋转位移
+		sky_back->setTranslation(glm::vec3(0.0, 0.0, 0.0));
+		sky_back->setRotation(glm::vec3(0.0, 0.0, 0.0));
+		sky_back->setScale(glm::vec3(60.0, 60.0, 60.0));
+
+		sky_back->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		sky_back->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		sky_back->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		sky_back->setShininess(1.0); //高光系数
+		// 加到painter中
+		sky_painter->addMesh(sky_back, "mesh_a", "./assets/front.jpg", vshader, fshader); 	// 指定纹理与着色器
+		// 我们创建的这个加入一个容器内，为了程序结束时将这些数据释放
+		meshList4.push_back(sky_back);
+
+
+		//front
+		TriMesh* sky_front = new TriMesh();
+		sky_front->setNormalize(true);
+		// 创建圆柱体
+		sky_front->generateSquareFront(glm::vec3(0.0, 0.0, 0.0));
+		//exit(-1);
+		// 设置物体的旋转位移
+		sky_front->setTranslation(glm::vec3(0.0, 0.0, 0.0));
+		sky_front->setRotation(glm::vec3(0.0, 0.0, 0.0));
+		sky_front->setScale(glm::vec3(60.0, 60.0, 60.0));
+
+		sky_front->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		sky_front->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		sky_front->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		sky_front->setShininess(1.0); //高光系数
+		// 加到painter中
+		sky_painter->addMesh(sky_front, "mesh_a", "./assets/back.jpg", vshader, fshader); 	// 指定纹理与着色器
+		// 我们创建的这个加入一个容器内，为了程序结束时将这些数据释放
+		meshList4.push_back(sky_front);
+	}
 	
 	// hat
 	hat->setNormalize(true);
@@ -863,6 +995,7 @@ void display()
 	painter->drawMeshes(light, camera);
 	painter2->drawMeshes2(light, camera);
 	display_robot();
+	sky_painter->drawMeshes2(light, camera);
 }
 
 
@@ -947,12 +1080,12 @@ void renew_theta(int step)
 	if (step < 0)
 	{
 		step = -step;
-		step = step % 60;
-		theta[2] = step * 6;
+		//step = step % 60;
+		theta[2] = -step * 6;
 	}
 	else
 	{
-		step = step % 60;
+		//step = step % 60;
 		theta[2] = step * 6;
 	}
 }

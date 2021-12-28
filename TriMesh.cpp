@@ -38,6 +38,50 @@ const glm::vec3 square_vertices[4] = {
 	glm::vec3(-0.5, 0.5, 0.0),
 };
 
+//天空盒的顶点数据
+const glm::vec3 right_vertices[4] = {
+	glm::vec3(1.0,-1.0,-1.0),
+	glm::vec3(1.0,-1.0,1.0),
+	glm::vec3(1.0,1.0,1.0),
+	glm::vec3(1.0,1.0,-1.0)
+};
+
+const glm::vec3 left_vertices[4] = {
+	glm::vec3(-1.0,-1.0,-1.0),
+	glm::vec3(-1.0,-1.0,1.0),
+	glm::vec3(-1.0,1.0,1.0),
+	glm::vec3(-1.0,1.0,-1.0)
+};
+
+const glm::vec3 top_vertices[4] = {
+	glm::vec3(-1.0,1.0,-1.0),
+	glm::vec3(1.0,1.0,-1.0),
+	glm::vec3(1.0,1.0,1.0),
+	glm::vec3(-1.0,1.0,1.0)
+};
+
+const glm::vec3 buttom_vertices[4] = {
+	glm::vec3(-1.0,-1.0,-1.0),
+	glm::vec3(1.0,-1.0,-1.0),
+	glm::vec3(1.0,-1.0,1.0),
+	glm::vec3(-1.0,-1.0,1.0)
+};
+
+const glm::vec3 back_vertices[4] = {
+	glm::vec3(-1.0,-1.0,-1.0),
+	glm::vec3(1.0,-1.0,-1.0),
+	glm::vec3(1.0,1.0,-1.0),
+	glm::vec3(-1.0,1.0,-1.0)
+};
+
+const glm::vec3 front_vertices[4] = {
+	glm::vec3(-1.0,-1.0,1.0),
+	glm::vec3(1.0,-1.0,1.0),
+	glm::vec3(1.0,1.0,1.0),
+	glm::vec3(-1.0,1.0,1.0)
+};
+
+
 TriMesh::TriMesh()
 {
 	scale = glm::vec3(1.0);
@@ -156,6 +200,40 @@ void TriMesh::setNormalize(bool do_norm) { do_normalize_size = do_norm; }
 bool TriMesh::getNormalize() { return do_normalize_size; }
 float TriMesh::getDiagonalLength() { return diagonal_length; }
 
+//用于绘制天空盒
+void TriMesh::storeFacesPoints_skybox()
+{
+	// 计算法向量
+	if (vertex_normals.size() == 0)
+		computeVertexNormals();
+
+	// 根据每个三角面片的顶点下标存储要传入GPU的数据
+	for (int i = 0; i < faces.size(); i++)
+	{
+		// 坐标
+		points.push_back(vertex_positions[faces[i].x]);
+		points.push_back(vertex_positions[faces[i].y]);
+		points.push_back(vertex_positions[faces[i].z]);
+		// 颜色
+		colors.push_back(vertex_colors[color_index[i].x]);
+		colors.push_back(vertex_colors[color_index[i].y]);
+		colors.push_back(vertex_colors[color_index[i].z]);
+		// 法向量
+		if (vertex_normals.size() != 0)
+		{
+			normals.push_back(vertex_normals[normal_index[i].x]);
+			normals.push_back(vertex_normals[normal_index[i].y]);
+			normals.push_back(vertex_normals[normal_index[i].z]);
+		}
+		// 纹理
+		if (vertex_textures.size() != 0)
+		{
+			textures.push_back(vertex_textures[texture_index[i].x]);
+			textures.push_back(vertex_textures[texture_index[i].y]);
+			textures.push_back(vertex_textures[texture_index[i].z]);
+		}
+	}
+}
 
 void TriMesh::storeFacesPoints()
 {
@@ -426,6 +504,211 @@ void TriMesh::generateTriangle(glm::vec3 color)
 	storeFacesPoints();
 }
 
+void TriMesh::generateSquareRight(glm::vec3 color)
+{
+	// 创建顶点前要先把那些vector清空
+	cleanData();
+
+	for (int i = 0; i < 4; i++)
+	{
+		vertex_positions.push_back(right_vertices[i]);
+		vertex_colors.push_back(color);
+	}
+
+	// 每个三角面片的顶点下标
+	faces.push_back(vec3i(0, 1, 2));
+	faces.push_back(vec3i(0, 2, 3));
+
+	/*// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));*/
+	// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(0, 1));
+	vertex_textures.push_back(glm::vec2(1, 1));
+
+	normal_index = faces;
+	color_index = faces;
+	texture_index = faces;
+
+	storeFacesPoints_skybox();
+}
+
+void TriMesh::generateSquareLeft(glm::vec3 color)
+{
+	// 创建顶点前要先把那些vector清空
+	cleanData();
+
+	for (int i = 0; i < 4; i++)
+	{
+		vertex_positions.push_back(left_vertices[i]);
+		vertex_colors.push_back(color);
+	}
+
+	// 每个三角面片的顶点下标
+	faces.push_back(vec3i(0, 1, 2));
+	faces.push_back(vec3i(0, 2, 3));
+
+	/*// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));*/
+
+	// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));
+
+	normal_index = faces;
+	color_index = faces;
+	texture_index = faces;
+
+	storeFacesPoints_skybox();
+}
+
+void TriMesh::generateSquareTop(glm::vec3 color)
+{
+	// 创建顶点前要先把那些vector清空
+	cleanData();
+
+	for (int i = 0; i < 4; i++)
+	{
+		vertex_positions.push_back(top_vertices[i]);
+		vertex_colors.push_back(color);
+	}
+
+	// 每个三角面片的顶点下标
+	faces.push_back(vec3i(0, 1, 2));
+	faces.push_back(vec3i(0, 2, 3));
+
+	/*// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));*/
+
+	// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 1));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(0, 0));
+
+	normal_index = faces;
+	color_index = faces;
+	texture_index = faces;
+
+	storeFacesPoints_skybox();
+}
+
+void TriMesh::generateSquareButtom(glm::vec3 color)
+{
+	// 创建顶点前要先把那些vector清空
+	cleanData();
+
+	for (int i = 0; i < 4; i++)
+	{
+		vertex_positions.push_back(buttom_vertices[i]);
+		vertex_colors.push_back(color);
+	}
+
+	// 每个三角面片的顶点下标
+	faces.push_back(vec3i(0, 1, 2));
+	faces.push_back(vec3i(0, 2, 3));
+
+	/*// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));*/
+
+	// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));
+
+	normal_index = faces;
+	color_index = faces;
+	texture_index = faces;
+
+	storeFacesPoints_skybox();
+}
+
+void TriMesh::generateSquareBack(glm::vec3 color)
+{
+	// 创建顶点前要先把那些vector清空
+	cleanData();
+
+	for (int i = 0; i < 4; i++)
+	{
+		vertex_positions.push_back(back_vertices[i]);
+		vertex_colors.push_back(color);
+	}
+
+	// 每个三角面片的顶点下标
+	faces.push_back(vec3i(0, 1, 2));
+	faces.push_back(vec3i(0, 2, 3));
+
+	/*// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));*/
+
+
+	// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(0, 1));
+	vertex_textures.push_back(glm::vec2(1, 1));
+
+	normal_index = faces;
+	color_index = faces;
+	texture_index = faces;
+
+	storeFacesPoints_skybox();
+}
+
+void TriMesh::generateSquareFront(glm::vec3 color)
+{
+	// 创建顶点前要先把那些vector清空
+	cleanData();
+
+	for (int i = 0; i < 4; i++)
+	{
+		vertex_positions.push_back(front_vertices[i]);
+		vertex_colors.push_back(color);
+	}
+
+	// 每个三角面片的顶点下标
+	faces.push_back(vec3i(0, 1, 2));
+	faces.push_back(vec3i(0, 2, 3));
+
+	/*// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));*/
+
+	// 顶点纹理坐标
+	vertex_textures.push_back(glm::vec2(0, 0));
+	vertex_textures.push_back(glm::vec2(1, 0));
+	vertex_textures.push_back(glm::vec2(1, 1));
+	vertex_textures.push_back(glm::vec2(0, 1));
+
+	normal_index = faces;
+	color_index = faces;
+	texture_index = faces;
+
+	storeFacesPoints_skybox();
+}
+
+
 void TriMesh::generateSquare(glm::vec3 color)
 {
 	// 创建顶点前要先把那些vector清空
@@ -451,7 +734,7 @@ void TriMesh::generateSquare(glm::vec3 color)
 	color_index = faces;
 	texture_index = faces;
 
-	storeFacesPoints();
+	storeFacesPoints_skybox();
 }
 
 void TriMesh::generateCylinder(int num_division, float radius, float height)
