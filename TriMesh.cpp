@@ -519,11 +519,7 @@ void TriMesh::generateSquareRight(glm::vec3 color)
 	faces.push_back(vec3i(0, 1, 2));
 	faces.push_back(vec3i(0, 2, 3));
 
-	/*// 顶点纹理坐标
-	vertex_textures.push_back(glm::vec2(0, 0));
-	vertex_textures.push_back(glm::vec2(1, 0));
-	vertex_textures.push_back(glm::vec2(1, 1));
-	vertex_textures.push_back(glm::vec2(0, 1));*/
+	
 	// 顶点纹理坐标
 	vertex_textures.push_back(glm::vec2(1, 0));
 	vertex_textures.push_back(glm::vec2(0, 0));

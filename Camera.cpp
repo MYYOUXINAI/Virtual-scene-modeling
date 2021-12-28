@@ -141,11 +141,11 @@ void  Camera::sroll(double x, double y)
 {
 	if (y > 0)
 	{
-		radius -= 0.1;
+		radius -= 0.4;
 	}
 	if (y < 0)
 	{
-		radius += 0.1;
+		radius += 0.4;
 	}
 }
 

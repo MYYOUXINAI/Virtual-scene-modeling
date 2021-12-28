@@ -363,7 +363,7 @@ void init()
 		// 设置物体的旋转位移
 		sky_right->setTranslation(glm::vec3(0.0, 0.0, 0.0));
 		sky_right->setRotation(glm::vec3(0.0, 0.0, 0.0));
-		sky_right->setScale(glm::vec3(60.0, 60.0, 60.0));
+		sky_right->setScale(glm::vec3(30.0, 30.0, 30.0));
 
 		sky_right->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 		sky_right->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -384,7 +384,7 @@ void init()
 		// 设置物体的旋转位移
 		sky_left->setTranslation(glm::vec3(0.0, 0.0, 0.0));
 		sky_left->setRotation(glm::vec3(0.0, 0.0, 0.0));
-		sky_left->setScale(glm::vec3(60.0, 60.0, 60.0));
+		sky_left->setScale(glm::vec3(30.0, 30.0, 30.0));
 
 		sky_left->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 		sky_left->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -405,7 +405,7 @@ void init()
 		// 设置物体的旋转位移
 		sky_top->setTranslation(glm::vec3(0.0, 0.0, 0.0));
 		sky_top->setRotation(glm::vec3(0.0, 0.0, 0.0));
-		sky_top->setScale(glm::vec3(60.0, 60.0, 60.0));
+		sky_top->setScale(glm::vec3(30.0, 30.0, 30.0));
 
 		sky_top->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 		sky_top->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -426,7 +426,7 @@ void init()
 		// 设置物体的旋转位移
 		sky_buttom->setTranslation(glm::vec3(0.0, 0.0, 0.0));
 		sky_buttom->setRotation(glm::vec3(0.0, 0.0, 0.0));
-		sky_buttom->setScale(glm::vec3(60.0, 60.0, 60.0));
+		sky_buttom->setScale(glm::vec3(30.0, 30.0, 30.0));
 
 		sky_buttom->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 		sky_buttom->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -447,7 +447,7 @@ void init()
 		// 设置物体的旋转位移
 		sky_back->setTranslation(glm::vec3(0.0, 0.0, 0.0));
 		sky_back->setRotation(glm::vec3(0.0, 0.0, 0.0));
-		sky_back->setScale(glm::vec3(60.0, 60.0, 60.0));
+		sky_back->setScale(glm::vec3(30.0, 30.0, 30.0));
 
 		sky_back->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 		sky_back->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -468,7 +468,7 @@ void init()
 		// 设置物体的旋转位移
 		sky_front->setTranslation(glm::vec3(0.0, 0.0, 0.0));
 		sky_front->setRotation(glm::vec3(0.0, 0.0, 0.0));
-		sky_front->setScale(glm::vec3(60.0, 60.0, 60.0));
+		sky_front->setScale(glm::vec3(30.0, 30.0, 30.0));
 
 		sky_front->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 		sky_front->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -730,7 +730,7 @@ void init()
 	cars->readObj("./assets/cars.obj");
 
 	// 设置物体的旋转位移
-	cars->setTranslation(glm::vec3(3, 0.5, 3.0));
+	cars->setTranslation(glm::vec3(0, 0.5, 25.0));
 	cars->setRotation(glm::vec3(0, 0, 0));
 	cars->setScale(glm::vec3(3.0, 3.0, 3.0));
 
@@ -746,13 +746,14 @@ void init()
 
 
 
+
 	TriMesh* cars2 = new TriMesh();
 	// car2
 	cars2->setNormalize(true);
 	cars2->readObj("./assets/cars2.obj");
 
 	// 设置物体的旋转位移
-	cars2->setTranslation(glm::vec3(3, 0.6, -5.0));
+	cars2->setTranslation(glm::vec3(0, 0.6, -25.0));
 	cars2->setRotation(glm::vec3(0, 0, 0));
 	cars2->setScale(glm::vec3(3.0, 3.0, 3.0));
 
@@ -787,37 +788,15 @@ void init()
 
 
 
-
-	/*TriMesh* floor = new TriMesh();
-	// floor
-	floor->setNormalize(true);
-	floor->readObj("./assets/floor.obj");
-
-	// 设置物体的旋转位移
-	floor->setTranslation(glm::vec3(0, -0.75, 0.0));
-	floor->setRotation(glm::vec3(0, 0, 0));
-	floor->setScale(glm::vec3(30.0, 3.0, 30.0));
-
-	floor->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
-	floor->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
-	floor->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
-	floor->setShininess(1.0); //高光系数
-
-   // 加到painter中
-	painter->addMesh(floor, "mesh_a", "./assets/floor.png", vshader, fshader);
-
-	meshList.push_back(floor);*/
-
-
 	TriMesh* house = new TriMesh();
 	// house
 	house->setNormalize(true);
 	house->readObj("./assets/house.obj");
 
 	// 设置物体的旋转位移
-	house->setTranslation(glm::vec3(-7, 3.6, -7.0));
+	house->setTranslation(glm::vec3(-20, 7.1, -20));
 	house->setRotation(glm::vec3(0, 0, 0));
-	house->setScale(glm::vec3(10.0, 10.0, 10.0));
+	house->setScale(glm::vec3(20.0, 20.0, 20.0));
 
 	house->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 	house->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -828,6 +807,194 @@ void init()
 	painter->addMesh(house, "mesh_a", "./assets/house.png", vshader, fshader);
 
 	meshList.push_back(house);
+	if (true)
+	{
+		TriMesh* housetemp = new TriMesh();
+		// house
+		housetemp->setNormalize(true);
+		housetemp->readObj("./assets/house.obj");
+
+		// 设置物体的旋转位移
+		housetemp->setTranslation(glm::vec3(20.0, 7.1, 0.0));
+		housetemp->setRotation(glm::vec3(0, 0, 0));
+		housetemp->setScale(glm::vec3(20.0, 20.0, 20.0));
+
+		housetemp->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		housetemp->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		housetemp->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		housetemp->setShininess(1.0); //高光系数
+
+	   // 加到painter中
+		painter->addMesh(housetemp, "mesh_a", "./assets/house.png", vshader, fshader);
+
+		meshList.push_back(housetemp);
+	}
+
+	if (true)
+	{
+		TriMesh* housetemp = new TriMesh();
+		// house
+		housetemp->setNormalize(true);
+		housetemp->readObj("./assets/house.obj");
+
+		// 设置物体的旋转位移
+		housetemp->setTranslation(glm::vec3(-20.0, 7.1, 20.0));
+		housetemp->setRotation(glm::vec3(0, 0, 0));
+		housetemp->setScale(glm::vec3(20.0, 20.0, 20.0));
+
+		housetemp->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		housetemp->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		housetemp->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		housetemp->setShininess(1.0); //高光系数
+
+	   // 加到painter中
+		painter->addMesh(housetemp, "mesh_a", "./assets/house.png", vshader, fshader);
+
+		meshList.push_back(housetemp);
+	}
+
+	//tree
+	if (true)
+	{
+		if (true)
+		{
+			TriMesh* tree = new TriMesh();
+			// tree
+			tree->setNormalize(true);
+			tree->readObj("./assets/tree.obj");
+
+			// 设置物体的旋转位移
+			tree->setTranslation(glm::vec3(-4, 2.8, 20));
+			tree->setRotation(glm::vec3(0, 0, 0));
+			tree->setScale(glm::vec3(8.0, 8.0, 8.0));
+
+			tree->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+			tree->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+			tree->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+			tree->setShininess(1.0); //高光系数
+
+		   // 加到painter中
+			painter->addMesh(tree, "mesh_a", "./assets/tree.png", vshader, fshader);
+
+			meshList.push_back(tree);
+		}
+
+		if (true)
+		{
+			TriMesh* tree = new TriMesh();
+			// tree
+			tree->setNormalize(true);
+			tree->readObj("./assets/tree.obj");
+
+			// 设置物体的旋转位移
+			tree->setTranslation(glm::vec3(-10, 2.8, 10));
+			tree->setRotation(glm::vec3(0, 0, 0));
+			tree->setScale(glm::vec3(8.0, 8.0, 8.0));
+
+			tree->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+			tree->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+			tree->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+			tree->setShininess(1.0); //高光系数
+
+		   // 加到painter中
+			painter->addMesh(tree, "mesh_a", "./assets/tree.png", vshader, fshader);
+
+			meshList.push_back(tree);
+		}
+
+		if (true)
+		{
+			TriMesh* tree = new TriMesh();
+			// tree
+			tree->setNormalize(true);
+			tree->readObj("./assets/tree.obj");
+
+			// 设置物体的旋转位移
+			tree->setTranslation(glm::vec3(10, 2.8, 10));
+			tree->setRotation(glm::vec3(0, 0, 0));
+			tree->setScale(glm::vec3(8.0, 8.0, 8.0));
+
+			tree->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+			tree->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+			tree->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+			tree->setShininess(1.0); //高光系数
+
+		   // 加到painter中
+			painter->addMesh(tree, "mesh_a", "./assets/tree.png", vshader, fshader);
+
+			meshList.push_back(tree);
+		}
+
+		if (true)
+		{
+			TriMesh* tree = new TriMesh();
+			// tree
+			tree->setNormalize(true);
+			tree->readObj("./assets/tree.obj");
+
+			// 设置物体的旋转位移
+			tree->setTranslation(glm::vec3(4, 2.8, -20));
+			tree->setRotation(glm::vec3(0, 0, 0));
+			tree->setScale(glm::vec3(8.0, 8.0, 8.0));
+
+			tree->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+			tree->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+			tree->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+			tree->setShininess(1.0); //高光系数
+
+		   // 加到painter中
+			painter->addMesh(tree, "mesh_a", "./assets/tree.png", vshader, fshader);
+
+			meshList.push_back(tree);
+		}
+
+		if (true)
+		{
+			TriMesh* tree = new TriMesh();
+			// tree
+			tree->setNormalize(true);
+			tree->readObj("./assets/tree.obj");
+
+			// 设置物体的旋转位移
+			tree->setTranslation(glm::vec3(-10, 2.8, -10));
+			tree->setRotation(glm::vec3(0, 0, 0));
+			tree->setScale(glm::vec3(8.0, 8.0, 8.0));
+
+			tree->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+			tree->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+			tree->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+			tree->setShininess(1.0); //高光系数
+
+		   // 加到painter中
+			painter->addMesh(tree, "mesh_a", "./assets/tree.png", vshader, fshader);
+
+			meshList.push_back(tree);
+		}
+
+		if (true)
+		{
+			TriMesh* tree = new TriMesh();
+			// tree
+			tree->setNormalize(true);
+			tree->readObj("./assets/tree.obj");
+
+			// 设置物体的旋转位移
+			tree->setTranslation(glm::vec3(10, 2.8, -10));
+			tree->setRotation(glm::vec3(0, 0, 0));
+			tree->setScale(glm::vec3(8.0, 8.0, 8.0));
+
+			tree->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+			tree->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+			tree->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+			tree->setShininess(1.0); //高光系数
+
+		   // 加到painter中
+			painter->addMesh(tree, "mesh_a", "./assets/tree.png", vshader, fshader);
+
+			meshList.push_back(tree);
+		}
+	}
+
 
 
 
@@ -837,9 +1004,9 @@ void init()
 	house2->readObj("./assets/house2.obj");
 
 	// 设置物体的旋转位移
-	house2->setTranslation(glm::vec3(6, 3.925, 6.0));
+	house2->setTranslation(glm::vec3(-20, 7.65, 0.0));
 	house2->setRotation(glm::vec3(0, 0, 0));
-	house2->setScale(glm::vec3(10.0, 10.0, 10.0));
+	house2->setScale(glm::vec3(20.0, 20.0, 20.0));
 
 	house2->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
 	house2->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
@@ -850,6 +1017,53 @@ void init()
 	painter->addMesh(house2, "mesh_a", "./assets/house2.png", vshader, fshader);
 
 	meshList.push_back(house2);
+
+	if (true)
+	{
+		TriMesh* house2temp = new TriMesh();
+		// house2
+		house2temp->setNormalize(true);
+		house2temp->readObj("./assets/house2.obj");
+
+		// 设置物体的旋转位移
+		house2temp->setTranslation(glm::vec3(20, 7.65, -20.0));
+		house2temp->setRotation(glm::vec3(0, 0, 0));
+		house2temp->setScale(glm::vec3(20.0, 20.0, 20.0));
+
+		house2temp->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		house2temp->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		house2temp->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		house2temp->setShininess(1.0); //高光系数
+
+	   // 加到painter中
+		painter->addMesh(house2temp, "mesh_a", "./assets/house2.png", vshader, fshader);
+
+		meshList.push_back(house2temp);
+	}
+
+
+	if (true)
+	{
+		TriMesh* house2temp = new TriMesh();
+		// house2
+		house2temp->setNormalize(true);
+		house2temp->readObj("./assets/house2.obj");
+
+		// 设置物体的旋转位移
+		house2temp->setTranslation(glm::vec3(20, 7.65, 20.0));
+		house2temp->setRotation(glm::vec3(0, 0, 0));
+		house2temp->setScale(glm::vec3(20.0, 20.0, 20.0));
+
+		house2temp->setAmbient(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 环境光
+		house2temp->setDiffuse(glm::vec4(0.7, 0.7, 0.7, 1.0)); // 漫反射
+		house2temp->setSpecular(glm::vec4(0.2, 0.2, 0.2, 1.0)); // 镜面反射
+		house2temp->setShininess(1.0); //高光系数
+
+	   // 加到painter中
+		painter->addMesh(house2temp, "mesh_a", "./assets/house2.png", vshader, fshader);
+
+		meshList.push_back(house2temp);
+	}
 
 	display_floor();
 
@@ -1246,6 +1460,12 @@ void cleanData() {
 	delete painter_right_lower_leg;
 	painter_right_lower_leg = NULL;
 
+	sky_painter->cleanMeshes();
+	delete sky_painter;
+	sky_painter = NULL;
+
+	
+
 	for (int i=0; i<meshList.size(); i++) {
 		delete meshList[i];
 	}
@@ -1261,7 +1481,15 @@ void cleanData() {
 		delete meshList3[i];
 	}
 	meshList3.clear();
+
+	for (int i = 0; i < meshList4.size(); i++)
+	{
+		delete meshList4[i];
+	}
+	meshList4.clear();
 }
+
+
 //通过鼠标控制视角函数
 void mouse_pos_callback(GLFWwindow* window, double xpos, double ypos)
 {
